@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # Copyright 2021 FireEye, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
@@ -551,7 +552,7 @@ class BitsJob:
             self.job_dict[alias] = self.escape(self.job_dict[alias])
 
             # Update the object hash
-            if type(v) is not 'Dict':
+            if not isinstance(v, dict):
                 job_hash.update(str(v).encode('utf-8'))
 
         self.hash = job_hash.hexdigest()
