@@ -641,7 +641,8 @@ class ESENT_DB:
         cursor['CurrentTag']  = 0
 
         # Create a mapping of the long values tree
-        cursor['LongValues'] = self.__getLongValues(cursor['TableData']['LongValues']['FatherDataPageNumber'])
+        if 'FatherDataPageNumber' in cursor['TableData']['LongValues']:
+            cursor['LongValues'] = self.__getLongValues(cursor['TableData']['LongValues']['FatherDataPageNumber'])
 
         return cursor
 
