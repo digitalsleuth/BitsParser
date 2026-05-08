@@ -8,8 +8,11 @@
 # Author: Alberto Solino (@agsolino)
 
 from collections import OrderedDict
-from ese.structure import Structure
 from struct import unpack, pack
+try:
+    from bitsparser.ese.structure import Structure
+except ModuleNotFoundError:
+    from ese.structure import Structure
 
 # Constants
 

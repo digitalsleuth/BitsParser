@@ -20,8 +20,10 @@ import hashlib
 import argparse
 import datetime
 import traceback
-
-from ese.ese import ESENT_DB
+try:
+    from bitsparser.ese.ese import ESENT_DB
+except ModuleNotFoundError:
+    from ese.ese import ESENT_DB
 
 # On Windows advapi32 will be used to resolve SIDs
 try:
@@ -557,16 +559,19 @@ class BitsJob:
 
         self.hash = job_hash.hexdigest()
 
-
-if __name__ == '__main__':
-
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', '-i', default='%ALLUSERSPROFILE%\\Microsoft\\Network\\Downloader', help='Optionally specify the directory containing QMGR databases or the path to a file to process.')
     parser.add_argument('--output', '-o', help='Optionally specify a file for JSON output.  If not specified the output will be printed to stdout.')
     parser.add_argument('--carvedb', action='store_true', help='Carve deleted records from database files')
     parser.add_argument('--carveall', action='store_true', help='Carve deleted records from all other files')
     parsed_args = parser.parse_args()
-
+    if len(sys.argv[1:]) == 0:
+        parser.print_help()
+        parser.exit()
     queue_dir = os.path.expandvars(parsed_args.input)
     bits_parser = BitsParser(queue_dir, parsed_args.carvedb, parsed_args.carveall, parsed_args.output)
     bits_parser.run()
+
+if __name__ == '__main__':
+    main()

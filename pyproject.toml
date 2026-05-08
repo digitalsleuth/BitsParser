@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools >= 77.0.30"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+exclude = ["debian*", "binaries*", "build*", "dist*"]
+
+[project]
+name = "BitsParser"
+version = "1.1"
+dependencies = [
+    "bits_parser"
+]
+requires-python = ">=3.9"
+authors = [
+  {name = "Corey Forman (digitalsleuth) and FireEye", email = "github@digitalsleuth.ca"}
+]
+maintainers = [
+  {name = "Corey Forman (digitalsleuth)", email = "github@digitalsleuth.ca"}
+]
+description = "Python 3 tool to parse the Windows Background Intelligent Transfer Service database"
+readme = "README.md"
+keywords = ["digital forensics", "dfir", "bits", "bitsparser", "parse"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent"
+]
+
+[project.urls]
+Homepage = "https://github.com/digitalsleuth/bitsparser"
+
+[project.scripts]
+bitsparser = "bitsparser.bitsparser:main"
